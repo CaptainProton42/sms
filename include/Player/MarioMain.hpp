@@ -33,6 +33,7 @@ class TTrembleModelEffect;
 class TMBindShadowBody;
 class SampleCtrlModelData;
 class TMultiMtxEffect;
+class TEMario;
 
 // TODO: where should this be?
 enum E_SIDEWALK_TYPE {
@@ -1320,6 +1321,15 @@ public:
 
 	bool checkActionThing() { return mStatus & 0x1000 ? true : false; }
 
+	// Frabricated
+	bool checkUnk4292() const
+	{
+		if (unk4292 == 0xb || unk4292 == 0xc || unk4292 == 0x11) {
+			return true;
+		}
+		return false;
+	}
+
 public:
 	/* 0x74 */ u32 mInput;
 	/* 0x78 */ u32 unk78;
@@ -2104,7 +2114,13 @@ public:
 	/* 0x4228 */ TSoundParams mSoundParams;
 	/* 0x4244 */ TOptionParams mOptionParams;
 
-	char unk4290[0x80];
+	u16 unk4290; // goal flag for
+	u16 unk4292; // some kind of state
+	char unk4294[10];
+	TEMario* mEMario; // 0x42A0
+	char unk42A4[12];
+	f32 unk42B0; // distance for a collision check
+	char unk42B4[94];
 };
 
 extern TMario* gpMarioOriginal;
